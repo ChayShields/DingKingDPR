@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050608;
+  --surface: #0b0d13;
+  --surface-2: #12151d;
+  --border: #23283333;
+  --border-solid: #262b36;
+  --foreground: #f3f6fa;
+  --muted: #8992a3;
+  --accent: #46c8ff;
+  --accent-2: #b98cff;
+  --accent-foreground: #04141a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border-solid);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-sora);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Fine diagonal brushed-metal texture, distinct from a plain grid */
+.bg-brushed {
+  background-image: repeating-linear-gradient(
+    115deg,
+    color-mix(in srgb, var(--border-solid) 55%, transparent) 0px,
+    color-mix(in srgb, var(--border-solid) 55%, transparent) 1px,
+    transparent 1px,
+    transparent 7px
+  );
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 0%, black 30%, transparent 100%);
+}
+
+/* Chrome / reflective gradient text — the "restored reflection" motif */
+.text-chrome {
+  background-image: linear-gradient(
+    100deg,
+    #6b7686 0%,
+    #ffffff 22%,
+    #aebbcc 38%,
+    #ffffff 52%,
+    #7c8aa0 68%,
+    #ffffff 84%,
+    #6b7686 100%
+  );
+  background-size: 250% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: chrome-sheen 7s ease-in-out infinite;
+}
+
+@keyframes chrome-sheen {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Cursor-tracked spotlight, driven by --spot-x / --spot-y set via JS */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    480px circle at var(--spot-x, 50%) var(--spot-y, 0%),
+    color-mix(in srgb, var(--accent) 16%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--foreground);
+}
