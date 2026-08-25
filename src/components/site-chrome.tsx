@@ -8,8 +8,8 @@ import { WhatsAppIcon, MailIcon } from "@/components/icons";
 import { WHATSAPP_HREF, EMAIL_HREF, PHONE_DISPLAY } from "@/lib/contact";
 
 const NAV_LINKS = [
-  { href: "/", label: "Our Work" },
-  { href: "/about", label: "About & Contact" },
+  { href: "/our-work", label: "Our Work" },
+  { href: "/", label: "About & Contact" },
 ];
 
 export function Logo({ className }: { className?: string }) {

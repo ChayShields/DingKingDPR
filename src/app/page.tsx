@@ -1,79 +1,131 @@
 "use client";
 
-import Image from "next/image";
+import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { Reveal } from "@/components/reveal";
 import { TiltCard } from "@/components/tilt-card";
-import { CheckIcon, WhatsAppIcon, SparkleIcon, ArrowIcon } from "@/components/icons";
-import { WHATSAPP_HREF, SERVICE_AREA } from "@/lib/contact";
+import { CheckIcon, WhatsAppIcon, MailIcon } from "@/components/icons";
+import { WHATSAPP_HREF, EMAIL, EMAIL_HREF, SERVICE_AREA, PHONE_DISPLAY } from "@/lib/contact";
 
-const services = [
+const guarantees = [
   {
-    name: "Hail Damage",
+    title: "Paint never leaves the car",
     description:
-      "Multiple dents across a panel or the whole car, worked out one by one without a single panel being resprayed.",
+      "PDR reshapes the metal from behind the panel. Your original factory finish stays exactly as it was — no resprays, no colour-match risk.",
   },
   {
-    name: "Car Park Dings",
+    title: "Mobile to your location",
     description:
-      "Door edges and panels caught by a neighbouring car door — the most common job we see, usually sorted same day.",
+      "We come to your home or workplace across Suffolk, Norfolk and Essex — no dropping the car off and no courtesy car needed.",
   },
   {
-    name: "Minor Creases & Dents",
+    title: "Straight answers",
     description:
-      "Shopping trolleys, low-speed knocks, sports balls — if the paint isn't cracked, it's very likely a PDR job.",
+      "If a dent isn't a good PDR candidate — paint cracked, edge crease too sharp — we'll tell you honestly instead of taking the job anyway.",
   },
 ];
 
-const process = [
+const faqs = [
   {
-    step: "01",
-    title: "Send a photo",
-    description:
-      "WhatsApp us a photo of the damage and we'll give you an honest read on whether it's a PDR job and a rough price.",
+    q: "What is paintless dent repair?",
+    a: "A technique that massages dented metal back to its original shape from behind or beside the panel, using specialist rods and tools — without cutting, drilling, filling or repainting.",
   },
   {
-    step: "02",
-    title: "We map the dent",
-    description:
-      "On site, we use a reflection board to trace the dent's exact contour — the same technique in the photos below.",
+    q: "Will every dent qualify?",
+    a: "Most hail damage, door dings and minor creases do. If the paint is cracked or the metal has been stretched too far, a small filler or paint step may be needed alongside PDR — we'll always tell you upfront.",
   },
   {
-    step: "03",
-    title: "Worked out from behind",
-    description:
-      "Specialist tools massage the metal back to its original shape from behind the panel. No drilling, no filler.",
+    q: "Does PDR affect resale value?",
+    a: "The opposite — because the original paint is untouched, there's no bodywork history to disclose, unlike after a respray.",
   },
   {
-    step: "04",
-    title: "Original finish, done",
-    description:
-      "Your factory paint never leaves the car, so there's no colour-match risk and no resale history of bodywork.",
+    q: "How much does it cost?",
+    a: "Send a photo over WhatsApp and we'll give you a straight price before we come out. PDR is almost always cheaper than a bodyshop respray.",
+  },
+  {
+    q: "How long does a repair take?",
+    a: "Most single dents are finished within an hour or two, on site, while you get on with your day.",
+  },
+  {
+    q: "Do you work on electric vehicles?",
+    a: "Yes — PDR works on any metal panel, EV or otherwise. Aluminium panels need a slightly different touch, which we're experienced with.",
   },
 ];
+
+function ContactForm() {
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [contactInfo, setContactInfo] = useState("");
+  const [message, setMessage] = useState("");
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const subject = `New enquiry from ${name || "the website"}`;
+    const body = `Name: ${name}\nContact: ${contactInfo}\n\n${message}`;
+    window.location.href = `${EMAIL_HREF}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    router.push("/thank-you");
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="mt-8 grid gap-4 sm:grid-cols-2">
+      <input
+        required
+        placeholder="Your name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none focus:border-accent sm:col-span-1"
+      />
+      <input
+        required
+        placeholder="Email or phone"
+        value={contactInfo}
+        onChange={(e) => setContactInfo(e.target.value)}
+        className="rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none focus:border-accent sm:col-span-1"
+      />
+      <textarea
+        required
+        placeholder="Tell us about the damage — car, panel, roughly how big"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        rows={4}
+        className="rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none focus:border-accent sm:col-span-2"
+      />
+      <motion.button
+        type="submit"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className="rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground sm:col-span-2 sm:w-fit"
+      >
+        Send enquiry
+      </motion.button>
+    </form>
+  );
+}
 
 export default function Home() {
   return (
     <main className="flex-1">
-      <section className="spotlight relative overflow-hidden">
+      <section className="spotlight relative overflow-hidden border-b border-border">
         <div className="bg-brushed pointer-events-none absolute inset-0" />
-        <div className="relative mx-auto max-w-6xl px-6 py-24 sm:py-32">
+        <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-4 flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-accent"
+            className="mb-4 text-sm font-medium uppercase tracking-widest text-accent"
           >
-            <SparkleIcon className="h-3.5 w-3.5" />
-            Mobile paintless dent repair &middot; {SERVICE_AREA}
+            About &amp; contact
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="font-display text-chrome max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl"
+            className="font-display text-chrome max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl"
           >
-            The dent disappears. The reflection stays perfect.
+            Suffolk, Norfolk &amp; Essex's mobile dent specialists.
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -81,117 +133,30 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-6 max-w-2xl text-lg text-muted"
           >
-            No paint. No fillers. We massage your panel back to its original
-            shape from behind, so the factory finish never leaves the car.
-            Hail damage, car park dings, and minor creases — fixed at your
-            home or workplace.
+            At Ding King PDR we specialise in paintless dent repair —
+            removing dents, dings and creases from your vehicle's bodywork
+            using advanced techniques, all without paint or fillers.
+            Whether it's hail damage, a car park ding, or a minor panel dent,
+            we restore your car's original finish, quickly and cost
+            effectively, wherever you are.
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-10 flex flex-wrap gap-4"
-          >
-            <motion.a
-              href={WHATSAPP_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground"
-            >
-              <WhatsAppIcon className="h-4 w-4" />
-              Send us a photo for a quote
-            </motion.a>
-            <motion.a
-              href="#work"
-              whileHover={{ scale: 1.03, borderColor: "var(--accent)" }}
-              whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold hover:text-accent"
-            >
-              See the technique
-              <ArrowIcon className="h-4 w-4" />
-            </motion.a>
-          </motion.div>
         </div>
       </section>
 
-      <section id="work" className="border-t border-border bg-surface">
+      <section className="border-b border-border bg-surface">
         <div className="mx-auto max-w-6xl px-6 py-24">
           <Reveal>
             <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-              Our work: mapping a dent with a reflection board
-            </h2>
-            <p className="mt-4 max-w-2xl text-muted">
-              Before any metal gets worked, we hold a striped reflection
-              board against the panel. Every bend in the lines is the dent's
-              exact shape and depth — it's how we know precisely where to
-              push from behind, without ever touching the paint.
-            </p>
-          </Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            <Reveal>
-              <TiltCard className="aspect-[4/5]">
-                <Image
-                  src="/work/photo-1.png"
-                  alt="Reflection board revealing a dent's contour on a car door panel during paintless dent repair"
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 640px) 50vw, 100vw"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5">
-                  <p className="text-sm font-medium text-white">
-                    Wide angle — mapping the full panel
-                  </p>
-                </div>
-              </TiltCard>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <TiltCard className="aspect-[4/5]">
-                <Image
-                  src="/work/photo-2.png"
-                  alt="Close-up of the reflection board technique showing the exact contour of a car door dent"
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 640px) 50vw, 100vw"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5">
-                  <p className="text-sm font-medium text-white">
-                    Close-up — the exact contour, before we push a single mm
-                  </p>
-                </div>
-              </TiltCard>
-            </Reveal>
-          </div>
-          <Reveal delay={0.15}>
-            <p className="mt-8 max-w-2xl text-sm text-muted">
-              This particular job was a Nissan Leaf door panel — a sharp,
-              small dent worked out from behind until the reflection ran
-              clean and distortion-free again, with the original paint fully
-              intact.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      <section id="services" className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-24">
-          <Reveal>
-            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-              What we fix
+              Why people choose us
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {services.map((service, i) => (
-              <Reveal key={service.name} delay={i * 0.1}>
+          <div className="mt-12 grid gap-6 sm:grid-cols-3">
+            {guarantees.map((g, i) => (
+              <Reveal key={g.title} delay={i * 0.1}>
                 <TiltCard strength={8} glare={false} className="h-full">
-                  <div className="p-8">
-                    <h3 className="font-display text-xl font-semibold">
-                      {service.name}
-                    </h3>
-                    <p className="mt-3 text-sm text-muted">
-                      {service.description}
-                    </p>
+                  <div className="p-6">
+                    <h3 className="font-semibold">{g.title}</h3>
+                    <p className="mt-2 text-sm text-muted">{g.description}</p>
                   </div>
                 </TiltCard>
               </Reveal>
@@ -200,64 +165,79 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-border bg-surface">
+      <section id="faq" className="border-b border-border">
         <div className="mx-auto max-w-6xl px-6 py-24">
           <Reveal>
             <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-              How it works
+              Questions people actually ask
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {process.map((item, i) => (
-              <Reveal key={item.step} delay={i * 0.08}>
-                <p className="font-display text-sm font-semibold text-accent">
-                  {item.step}
-                </p>
-                <h3 className="mt-2 text-lg font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm text-muted">{item.description}</p>
+          <div className="mt-10 space-y-3">
+            {faqs.map((item, i) => (
+              <Reveal key={item.q} delay={i * 0.05}>
+                <details className="group rounded-xl border border-border bg-surface-2 px-6 py-4 open:border-accent/50">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium">
+                    {item.q}
+                    <span className="shrink-0 text-accent transition-transform group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-3 text-sm text-muted">{item.a}</p>
+                </details>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-border">
+      <section id="contact" className="bg-surface">
         <div className="mx-auto max-w-6xl px-6 py-24">
           <Reveal>
             <div className="rounded-2xl border border-border bg-surface-2 p-10 sm:p-14">
-              <div className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
-                <div>
-                  <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-                    Got a dent? Send a photo.
-                  </h2>
-                  <p className="mt-4 max-w-xl text-muted">
-                    We'll tell you straight away if it's a PDR job, roughly
-                    what it'll cost, and come to you across {SERVICE_AREA}.
-                  </p>
-                </div>
-                <div className="flex shrink-0 flex-wrap gap-3">
-                  <motion.a
-                    href={WHATSAPP_HREF}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground"
-                  >
-                    <WhatsAppIcon className="h-4 w-4" />
-                    WhatsApp us now
-                  </motion.a>
-                </div>
+              <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
+                Get your dent looked at
+              </h2>
+              <p className="mt-4 max-w-xl text-muted">
+                Fill in the form, WhatsApp a photo, or email us directly —
+                whatever's easiest. We cover {SERVICE_AREA} and reply fast.
+              </p>
+              <ContactForm />
+              <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-border pt-6 text-sm text-muted">
+                <span>Prefer not to fill out a form?</span>
+                <motion.a
+                  href={WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground"
+                >
+                  <WhatsAppIcon className="h-4 w-4" />
+                  Chat on WhatsApp
+                </motion.a>
+                <motion.a
+                  href={EMAIL_HREF}
+                  whileHover={{ scale: 1.03, borderColor: "var(--accent)" }}
+                  whileTap={{ scale: 0.97 }}
+                  className="flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold hover:text-accent"
+                >
+                  <MailIcon className="h-4 w-4" />
+                  Email us
+                </motion.a>
               </div>
-              <ul className="mt-8 grid gap-3 border-t border-border pt-8 text-sm sm:grid-cols-3">
-                {["No paint, ever", "Mobile to you", "Same-day quotes"].map(
-                  (item) => (
-                    <li key={item} className="flex items-center gap-2">
-                      <CheckIcon className="h-4 w-4 shrink-0 text-accent" />
-                      {item}
-                    </li>
-                  )
-                )}
+              <ul className="mt-8 grid gap-3 border-t border-border pt-6 text-sm sm:grid-cols-3">
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 shrink-0 text-accent" />
+                  {PHONE_DISPLAY} (WhatsApp)
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 shrink-0 text-accent" />
+                  {EMAIL}
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 shrink-0 text-accent" />
+                  Covering {SERVICE_AREA}
+                </li>
               </ul>
             </div>
           </Reveal>
