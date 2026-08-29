@@ -1,11 +1,16 @@
-"use client";
-
+import type { Metadata } from "next";
 import Image from "next/image";
-import { motion } from "motion/react";
 import { Reveal } from "@/components/reveal";
 import { TiltCard } from "@/components/tilt-card";
+import { MotionLink } from "@/components/motion-link";
 import { CheckIcon, WhatsAppIcon, SparkleIcon, ArrowIcon } from "@/components/icons";
 import { WHATSAPP_HREF, SERVICE_AREA } from "@/lib/contact";
+
+export const metadata: Metadata = {
+  title: "Our Work",
+  description:
+    "See how Ding King PDR maps and repairs dents with the reflection-board technique — real paintless dent repair work across Suffolk, Norfolk and Essex.",
+};
 
 const services = [
   {
@@ -58,61 +63,46 @@ export default function OurWork() {
       <section className="spotlight relative overflow-hidden">
         <div className="bg-brushed pointer-events-none absolute inset-0" />
         <div className="relative mx-auto max-w-6xl px-6 py-24 sm:py-32">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-4 flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-accent"
-          >
-            <SparkleIcon className="h-3.5 w-3.5" />
-            Mobile paintless dent repair &middot; {SERVICE_AREA}
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-            className="font-display text-chrome max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl"
-          >
-            The dent disappears. The reflection stays perfect.
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-6 max-w-2xl text-lg text-muted"
-          >
-            No paint. No fillers. We massage your panel back to its original
-            shape from behind, so the factory finish never leaves the car.
-            Hail damage, car park dings, and minor creases — fixed at your
-            home or workplace.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-10 flex flex-wrap gap-4"
-          >
-            <motion.a
-              href={WHATSAPP_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground"
-            >
-              <WhatsAppIcon className="h-4 w-4" />
-              Send us a photo for a quote
-            </motion.a>
-            <motion.a
-              href="#work"
-              whileHover={{ scale: 1.03, borderColor: "var(--accent)" }}
-              whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold hover:text-accent"
-            >
-              See the technique
-              <ArrowIcon className="h-4 w-4" />
-            </motion.a>
-          </motion.div>
+          <Reveal>
+            <p className="mb-4 flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-accent">
+              <SparkleIcon className="h-3.5 w-3.5" />
+              Mobile paintless dent repair &middot; {SERVICE_AREA}
+            </p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h1 className="font-display text-chrome max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl">
+              The dent disappears. The reflection stays perfect.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-6 max-w-2xl text-lg text-muted">
+              No paint. No fillers. We massage your panel back to its original
+              shape from behind, so the factory finish never leaves the car.
+              Hail damage, car park dings, and minor creases — fixed at your
+              home or workplace.
+            </p>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <MotionLink
+                href={WHATSAPP_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                Send us a photo for a quote
+              </MotionLink>
+              <MotionLink
+                href="#work"
+                whileHover={{ scale: 1.03, borderColor: "var(--accent)" }}
+                className="flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold hover:text-accent"
+              >
+                See the technique
+                <ArrowIcon className="h-4 w-4" />
+              </MotionLink>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -236,17 +226,15 @@ export default function OurWork() {
                   </p>
                 </div>
                 <div className="flex shrink-0 flex-wrap gap-3">
-                  <motion.a
+                  <MotionLink
                     href={WHATSAPP_HREF}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
                     className="flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground"
                   >
                     <WhatsAppIcon className="h-4 w-4" />
                     WhatsApp us now
-                  </motion.a>
+                  </MotionLink>
                 </div>
               </div>
               <ul className="mt-8 grid gap-3 border-t border-border pt-8 text-sm sm:grid-cols-3">

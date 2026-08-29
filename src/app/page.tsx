@@ -1,12 +1,16 @@
-"use client";
-
-import { useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
-import { motion } from "motion/react";
+import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
 import { TiltCard } from "@/components/tilt-card";
+import { ContactForm } from "@/components/contact-form";
+import { MotionLink } from "@/components/motion-link";
 import { CheckIcon, WhatsAppIcon, MailIcon } from "@/components/icons";
 import { WHATSAPP_HREF, EMAIL, EMAIL_HREF, SERVICE_AREA, PHONE_DISPLAY } from "@/lib/contact";
+
+export const metadata: Metadata = {
+  title: "About & Contact | Ding King PDR",
+  description:
+    "Get in touch with Ding King PDR for mobile paintless dent repair across Suffolk, Norfolk and Essex — WhatsApp a photo, email us, or fill in the form for a straight quote.",
+};
 
 const guarantees = [
   {
@@ -53,93 +57,32 @@ const faqs = [
   },
 ];
 
-function ContactForm() {
-  const router = useRouter();
-  const [name, setName] = useState("");
-  const [contactInfo, setContactInfo] = useState("");
-  const [message, setMessage] = useState("");
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const subject = `New enquiry from ${name || "the website"}`;
-    const body = `Name: ${name}\nContact: ${contactInfo}\n\n${message}`;
-    window.location.href = `${EMAIL_HREF}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    router.push("/thank-you");
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="mt-8 grid gap-4 sm:grid-cols-2">
-      <input
-        required
-        placeholder="Your name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none focus:border-accent sm:col-span-1"
-      />
-      <input
-        required
-        placeholder="Email or phone"
-        value={contactInfo}
-        onChange={(e) => setContactInfo(e.target.value)}
-        className="rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none focus:border-accent sm:col-span-1"
-      />
-      <textarea
-        required
-        placeholder="Tell us about the damage — car, panel, roughly how big"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        rows={4}
-        className="rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none focus:border-accent sm:col-span-2"
-      />
-      <motion.button
-        type="submit"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className="rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground sm:col-span-2 sm:w-fit"
-      >
-        Send enquiry
-      </motion.button>
-    </form>
-  );
-}
-
 export default function Home() {
   return (
     <main className="flex-1">
       <section className="spotlight relative overflow-hidden border-b border-border">
         <div className="bg-brushed pointer-events-none absolute inset-0" />
         <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-4 text-sm font-medium uppercase tracking-widest text-accent"
-          >
-            About &amp; contact
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-            className="font-display text-chrome max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl"
-          >
-            Suffolk, Norfolk &amp; Essex's mobile dent specialists.
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-6 max-w-2xl text-lg text-muted"
-          >
-            At Ding King PDR we specialise in paintless dent repair —
-            removing dents, dings and creases from your vehicle's bodywork
-            using advanced techniques, all without paint or fillers.
-            Whether it's hail damage, a car park ding, or a minor panel dent,
-            we restore your car's original finish, quickly and cost
-            effectively, wherever you are.
-          </motion.p>
+          <Reveal>
+            <p className="mb-4 text-sm font-medium uppercase tracking-widest text-accent">
+              About &amp; contact
+            </p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h1 className="font-display text-chrome max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
+              Suffolk, Norfolk &amp; Essex's mobile dent specialists.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-6 max-w-2xl text-lg text-muted">
+              At Ding King PDR we specialise in paintless dent repair —
+              removing dents, dings and creases from your vehicle's bodywork
+              using advanced techniques, all without paint or fillers.
+              Whether it's hail damage, a car park ding, or a minor panel dent,
+              we restore your car's original finish, quickly and cost
+              effectively, wherever you are.
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -204,26 +147,23 @@ export default function Home() {
               <ContactForm />
               <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-border pt-6 text-sm text-muted">
                 <span>Prefer not to fill out a form?</span>
-                <motion.a
+                <MotionLink
                   href={WHATSAPP_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
                   className="flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground"
                 >
                   <WhatsAppIcon className="h-4 w-4" />
                   Chat on WhatsApp
-                </motion.a>
-                <motion.a
+                </MotionLink>
+                <MotionLink
                   href={EMAIL_HREF}
                   whileHover={{ scale: 1.03, borderColor: "var(--accent)" }}
-                  whileTap={{ scale: 0.97 }}
                   className="flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold hover:text-accent"
                 >
                   <MailIcon className="h-4 w-4" />
                   Email us
-                </motion.a>
+                </MotionLink>
               </div>
               <ul className="mt-8 grid gap-3 border-t border-border pt-6 text-sm sm:grid-cols-3">
                 <li className="flex items-center gap-2">
