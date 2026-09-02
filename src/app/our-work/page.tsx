@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Our Work",
   description:
     "See how Ding King PDR maps and repairs dents with the reflection-board technique — real paintless dent repair work across Suffolk, Norfolk and Essex.",
+  alternates: {
+    canonical: "/our-work",
+  },
 };
 
 const services = [

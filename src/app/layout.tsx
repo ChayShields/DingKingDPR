@@ -3,6 +3,7 @@ import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 import { Header, Footer, WhatsAppFloat, BackgroundOrbs } from "@/components/site-chrome";
 import { EMAIL } from "@/lib/contact";
+import { SITE_URL } from "@/lib/site";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -16,12 +17,16 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Ding King PDR | Mobile Paintless Dent Repair",
     template: "%s | Ding King PDR",
   },
   description:
     "Ding King PDR removes dents, dings and creases across Suffolk, Norfolk and Essex with paintless dent repair — no paint, no fillers, original factory finish, mobile to your location.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 const localBusinessJsonLd = {
@@ -32,8 +37,9 @@ const localBusinessJsonLd = {
     "Mobile paintless dent repair (PDR) covering Suffolk, Norfolk and Essex — hail damage, car park dings, and minor creases fixed without paint or fillers.",
   telephone: "+447845863604",
   email: EMAIL,
+  url: SITE_URL,
   areaServed: ["Suffolk", "Norfolk", "Essex"],
-  image: "/brand/logo.png",
+  image: `${SITE_URL}/brand/logo.png`,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

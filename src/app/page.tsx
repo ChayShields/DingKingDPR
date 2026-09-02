@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
 import { TiltCard } from "@/components/tilt-card";
-import { ContactForm } from "@/components/contact-form";
 import { MotionLink } from "@/components/motion-link";
 import { CheckIcon, WhatsAppIcon, MailIcon } from "@/components/icons";
 import { WHATSAPP_HREF, EMAIL, EMAIL_HREF, SERVICE_AREA, PHONE_DISPLAY } from "@/lib/contact";
@@ -9,7 +8,10 @@ import { WHATSAPP_HREF, EMAIL, EMAIL_HREF, SERVICE_AREA, PHONE_DISPLAY } from "@
 export const metadata: Metadata = {
   title: "About & Contact | Ding King PDR",
   description:
-    "Get in touch with Ding King PDR for mobile paintless dent repair across Suffolk, Norfolk and Essex — WhatsApp a photo, email us, or fill in the form for a straight quote.",
+    "Get in touch with Ding King PDR for mobile paintless dent repair across Suffolk, Norfolk and Essex — WhatsApp a photo or email us for a straight quote.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 const guarantees = [
@@ -141,12 +143,10 @@ export default function Home() {
                 Get your dent looked at
               </h2>
               <p className="mt-4 max-w-xl text-muted">
-                Fill in the form, WhatsApp a photo, or email us directly —
-                whatever's easiest. We cover {SERVICE_AREA} and reply fast.
+                WhatsApp a photo, or email us directly — whatever's easiest.
+                We cover {SERVICE_AREA} and reply fast.
               </p>
-              <ContactForm />
-              <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-border pt-6 text-sm text-muted">
-                <span>Prefer not to fill out a form?</span>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
                 <MotionLink
                   href={WHATSAPP_HREF}
                   target="_blank"
