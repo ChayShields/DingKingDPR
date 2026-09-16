@@ -21,7 +21,7 @@ export default function ThankYou() {
         Message sent
       </p>
       <h1 className="font-display text-chrome mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-        Thanks, we've got it.
+        Thanks, we&apos;ve got it.
       </h1>
       <p className="mt-4 max-w-md text-muted">
         Your email client should have opened with your message ready to

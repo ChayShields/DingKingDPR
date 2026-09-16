@@ -117,8 +117,8 @@ export default function OurWork() {
             </h2>
             <p className="mt-4 max-w-2xl text-muted">
               Before any metal gets worked, we hold a striped reflection
-              board against the panel. Every bend in the lines is the dent's
-              exact shape and depth — it's how we know precisely where to
+              board against the panel. Every bend in the lines is the dent&apos;s
+              exact shape and depth — it&apos;s how we know precisely where to
               push from behind, without ever touching the paint.
             </p>
           </Reveal>
@@ -224,8 +224,8 @@ export default function OurWork() {
                     Got a dent? Send a photo.
                   </h2>
                   <p className="mt-4 max-w-xl text-muted">
-                    We'll tell you straight away if it's a PDR job, roughly
-                    what it'll cost, and come to you across {SERVICE_AREA}.
+                    We&apos;ll tell you straight away if it&apos;s a PDR job, roughly
+                    what it&apos;ll cost, and come to you across {SERVICE_AREA}.
                   </p>
                 </div>
                 <div className="flex shrink-0 flex-wrap gap-3">

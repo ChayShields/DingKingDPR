@@ -144,6 +144,17 @@ export function Footer() {
           </a>
         </div>
       </div>
+      <div className="border-t border-border px-6 py-4 text-center text-xs text-muted">
+        Designed and developed by{" "}
+        <a
+          href="https://hireme.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="transition hover:text-foreground"
+        >
+          Chay Shields
+        </a>
+      </div>
     </footer>
   );
 }

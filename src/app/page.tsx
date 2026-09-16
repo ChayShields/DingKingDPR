@@ -72,16 +72,16 @@ export default function Home() {
           </Reveal>
           <Reveal delay={0.05}>
             <h1 className="font-display text-chrome max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
-              Suffolk, Norfolk &amp; Essex's mobile dent specialists.
+              Suffolk, Norfolk &amp; Essex&apos;s mobile dent specialists.
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-2xl text-lg text-muted">
               At Ding King PDR we specialise in paintless dent repair —
-              removing dents, dings and creases from your vehicle's bodywork
+              removing dents, dings and creases from your vehicle&apos;s bodywork
               using advanced techniques, all without paint or fillers.
-              Whether it's hail damage, a car park ding, or a minor panel dent,
-              we restore your car's original finish, quickly and cost
+              Whether it&apos;s hail damage, a car park ding, or a minor panel dent,
+              we restore your car&apos;s original finish, quickly and cost
               effectively, wherever you are.
             </p>
           </Reveal>
@@ -143,7 +143,7 @@ export default function Home() {
                 Get your dent looked at
               </h2>
               <p className="mt-4 max-w-xl text-muted">
-                WhatsApp a photo, or email us directly — whatever's easiest.
+                WhatsApp a photo, or email us directly — whatever&apos;s easiest.
                 We cover {SERVICE_AREA} and reply fast.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
