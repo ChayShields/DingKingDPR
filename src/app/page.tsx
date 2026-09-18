@@ -6,9 +6,6 @@ import { CheckIcon, WhatsAppIcon, MailIcon } from "@/components/icons";
 import { WHATSAPP_HREF, EMAIL, EMAIL_HREF, SERVICE_AREA, PHONE_DISPLAY } from "@/lib/contact";
 
 export const metadata: Metadata = {
-  title: "About & Contact | Ding King PDR",
-  description:
-    "Get in touch with Ding King PDR for mobile paintless dent repair across Suffolk, Norfolk and Essex — WhatsApp a photo or email us for a straight quote.",
   alternates: {
     canonical: "/",
   },
