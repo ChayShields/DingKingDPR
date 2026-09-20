@@ -3,6 +3,8 @@ import { Inter, Sora } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
 import { Header, Footer, WhatsAppFloat, BackgroundOrbs } from "@/components/site-chrome";
+import { CookieConsent } from "@/components/cookie-consent";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { EMAIL } from "@/lib/contact";
 import { SITE_URL } from "@/lib/site";
 
@@ -61,6 +63,8 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         <Footer />
         <WhatsAppFloat />
+        <CookieConsent />
+        <GoogleAnalytics />
       </body>
     </html>
   );

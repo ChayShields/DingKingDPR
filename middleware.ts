@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 function buildCsp(nonce: string) {
   return [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}'`,
-    "connect-src 'self'",
-    "img-src 'self' data:",
+    `script-src 'self' 'nonce-${nonce}' https://www.googletagmanager.com`,
+    "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
+    "img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com",
     "style-src 'self' 'unsafe-inline'",
     "font-src 'self'",
     "frame-ancestors 'none'",

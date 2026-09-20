@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { WhatsAppIcon, MailIcon } from "@/components/icons";
 import { WHATSAPP_HREF, EMAIL_HREF, PHONE_DISPLAY } from "@/lib/contact";
+import { CookieSettingsButton } from "@/components/cookie-consent";
 
 const NAV_LINKS = [
   { href: "/our-work", label: "Our Work" },
@@ -117,9 +118,12 @@ export function Header() {
   );
 }
 
+// pb-16 below sm: the fixed WhatsApp bar (z-30, ~52px) is pinned to the
+// bottom of the viewport on mobile and would otherwise sit on top of the
+// last footer row, making the privacy/cookie-settings links untappable.
 export function Footer() {
   return (
-    <footer className="border-t border-border">
+    <footer className="border-t border-border pb-16 sm:pb-0">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
         <p>
           <Logo /> &mdash; mobile paintless dent repair.
@@ -144,16 +148,22 @@ export function Footer() {
           </a>
         </div>
       </div>
-      <div className="border-t border-border px-6 py-4 text-center text-xs text-muted">
-        Designed and developed by{" "}
-        <a
-          href="https://hireme.link"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="transition hover:text-foreground"
-        >
-          Chay Shields
-        </a>
+      <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t border-border px-6 py-4 text-center text-xs text-muted">
+        <Link href="/privacy-policy" className="py-2 transition hover:text-foreground">
+          Privacy policy
+        </Link>
+        <CookieSettingsButton className="py-2 transition hover:text-foreground" />
+        <span>
+          Designed and developed by{" "}
+          <a
+            href="https://hireme.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition hover:text-foreground"
+          >
+            Chay Shields
+          </a>
+        </span>
       </div>
     </footer>
   );
