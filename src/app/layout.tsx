@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Sora } from "next/font/google";
-import { headers } from "next/headers";
 import "./globals.css";
 import { Header, Footer, WhatsAppFloat, BackgroundOrbs } from "@/components/site-chrome";
 import { CookieConsent } from "@/components/cookie-consent";
@@ -45,8 +44,7 @@ const localBusinessJsonLd = {
   image: `${SITE_URL}/brand/logo.png`,
 };
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const nonce = (await headers()).get("x-nonce") ?? undefined;
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
@@ -55,7 +53,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <script
           type="application/ld+json"
-          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
         <BackgroundOrbs />
