@@ -154,14 +154,14 @@ export function Footer() {
         </Link>
         <CookieSettingsButton className="py-2 transition hover:text-foreground" />
         <span>
-          Designed and developed by{" "}
+          Designed and developed by Chay Shields at{" "}
           <a
-            href="https://hireme.link"
+            href="https://buildory.co.uk"
             target="_blank"
             rel="noopener noreferrer"
             className="transition hover:text-foreground"
           >
-            Chay Shields
+            Buildory
           </a>
         </span>
       </div>
