@@ -29,6 +29,26 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  // Share card for WhatsApp, Facebook, X and LinkedIn. No page sets its own
+  // openGraph, so every page inherits this (a page's own openGraph would
+  // replace it, not merge). Title and description fall back to each page's.
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    siteName: "Ding King PDR",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Ding King PDR logo beside a paintless dent repair reflection board on a car panel",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.jpg"],
+  },
 };
 
 const localBusinessJsonLd = {
